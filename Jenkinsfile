@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        docker run -d --name 9000:8080 springapp
+                        docker run -d -p 9000:8080 springapp
                      """ 
                 }
             }
