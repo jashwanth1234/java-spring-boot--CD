@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage ("Git clone") {
+            steps {
+                script {
+                  checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitaccess', url: 'https://github.com/jashwanth1234/javaSpringBoot.git']]])
+                }
+            }
+        }
+        stage ("Image Build") {
+            steps {
+                script {
+                  sh '''cd ${WORKSPACE}
+                  docker build -t "springapp" . ''' 
+                }
+            }
+        }
+    }
+}
